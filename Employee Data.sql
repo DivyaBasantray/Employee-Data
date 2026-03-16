@@ -17,7 +17,7 @@ FROM (
 )a
 WHERE rnk = 1;
 
-SELECT distinct DepartmentType,
+SELECT DISTINCT DepartmentType,
 MAX(Current_Employee_Rating) OVER(PARTITION BY DepartmentType) AS maxPerformanceRating
 FROM employee_data;
 
@@ -52,7 +52,7 @@ SELECT GenderCode, COUNT(*) AS total
 FROM employee_data
 GROUP BY GenderCode;
 
-SELECT Division, count(*) AS total
+SELECT Division, COUNT(*) AS total
 FROM employee_data
 WHERE EmployeeStatus = 'Active' AND ExitDate IS NULL
 GROUP BY Division
@@ -86,7 +86,7 @@ FROM (
 WHERE a.ExitDate IS NULL AND a.EmployeeStatus = 'Active'
 GROUP BY a.SeniorityLevel;
 
-SELECT DepartmentType, Division, COUNT(*) as total
+SELECT DepartmentType, Division, COUNT(*) AS total
 FROM employee_data
 GROUP BY DepartmentType, Division
 ORDER BY DepartmentType, Division;
@@ -110,7 +110,8 @@ SELECT *,
 (total*100/(SELECT SUM(total) FROM cte)) AS 'percentage'
 FROM cte;
 
--- 86 employees need improvement while 44 are currently under Performance imporovement plan
+-- 86 employees need improvement while 44 are currently under Performance imporovement plan (pip)
+-- selecting those people from pip
 
 SELECT *
 FROM employee_data
